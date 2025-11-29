@@ -1,0 +1,192 @@
+/* --- 1. FONTS & VARIABLES --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap');
+
+:root {
+    --primary: #14532d;      /* Deep Emerald */
+    --accent: #d97706;       /* Rich Gold */
+    --dark: #0f172a;
+    --light: #f8fafc;
+    --white: #ffffff;
+    --ease: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* --- 2. GLOBAL RESET --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body { 
+    font-family: 'Poppins', sans-serif; 
+    background: var(--light); 
+    color: var(--dark); 
+    line-height: 1.8; 
+    overflow-x: hidden;
+}
+
+/* ⚠️ THIS REMOVES ALL WHITE UNDERLINES */
+a { 
+    text-decoration: none !important; 
+    color: inherit; 
+    transition: 0.3s;
+    border-bottom: none !important;
+}
+
+a:hover {
+    text-decoration: none !important;
+}
+
+/* --- 3. NAVBAR --- */
+header { 
+    position: fixed; top: 0; width: 100%; z-index: 1000;
+    transition: 0.4s var(--ease);
+    padding: 15px 0;
+    background: transparent;
+}
+header.scrolled {
+    background: rgba(15, 23, 42, 0.98); 
+    backdrop-filter: blur(10px);
+    padding: 10px 0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.navbar { 
+    display: flex; justify-content: space-between; align-items: center; 
+    max-width: 1300px; margin: auto; padding: 0 20px; 
+}
+.logo { font-size: 24px; font-weight: 900; color: white; letter-spacing: -1px; text-transform: uppercase; z-index: 1002; }
+
+.nav-links { display: flex; gap: 30px; }
+.nav-links a { 
+    font-weight: 600; font-size: 14px; text-transform: uppercase; 
+    letter-spacing: 1px; color: white; position: relative; padding: 5px 0;
+}
+
+/* This is the Gold Hover Line (Keep this, it looks professional) */
+.nav-links a::after {
+    content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0;
+    background: var(--accent); transition: 0.3s;
+}
+.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+/* Mobile Hamburger Icon */
+.hamburger {
+    display: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    z-index: 1002;
+}
+
+/* --- 4. PRELOADER & PROGRESS --- */
+#preloader {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--white); z-index: 9999;
+    display: flex; justify-content: center; align-items: center;
+    transition: opacity 0.5s ease;
+}
+.loader-logo { font-size: 3rem; font-weight: 800; color: var(--primary); animation: pulse 1.5s infinite; }
+.scroll-progress { position: fixed; top: 0; left: 0; height: 4px; background: var(--accent); width: 0%; z-index: 1001; }
+
+/* --- 5. HERO SECTION --- */
+.hero { 
+    min-height: 100vh; display: flex; align-items: center;
+    background-size: cover; background-position: center; background-attachment: fixed;
+    position: relative; padding: 80px 0;
+}
+.hero::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(6, 78, 59, 0.9), rgba(0,0,0,0.5));
+}
+.hero-content { 
+    position: relative; z-index: 2; max-width: 1300px; margin: auto; padding: 0 20px; 
+    color: white; transform: translateY(30px); opacity: 0; animation: fadeUp 1s forwards 0.5s;
+}
+.hero h1 { font-size: 4rem; font-weight: 800; line-height: 1.1; margin-bottom: 20px; }
+.gradient-text {
+    background: linear-gradient(to right, #fff, #cbd5e1);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.btn { 
+    display: inline-block; padding: 15px 40px; 
+    background: var(--accent); color: white; 
+    font-weight: 700; border-radius: 50px; text-transform: uppercase; 
+    letter-spacing: 1px; transition: 0.3s; border: 2px solid var(--accent);
+    text-decoration: none !important; /* Force remove underline */
+}
+.btn:hover { background: transparent; color: var(--accent); }
+
+/* --- 6. LAYOUT --- */
+.section { padding: 100px 0; }
+.container { max-width: 1300px; margin: auto; padding: 0 20px; }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: flex-start; }
+
+/* --- 7. CARDS --- */
+.card { 
+    background: white; border-radius: 20px; overflow: hidden; 
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05); 
+    transition: 0.4s; position: relative;
+}
+.card:hover { transform: translateY(-10px); }
+.card-img-box { height: 250px; overflow: hidden; }
+.card-img-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.7s; }
+.card:hover .card-img-box img { transform: scale(1.1); }
+.card-text { padding: 30px; position: relative; }
+.card-arrow {
+    position: absolute; top: -25px; right: 30px; 
+    width: 50px; height: 50px; background: var(--accent); border-radius: 50%;
+    display: grid; place-items: center; z-index: 10;
+    color: white; font-size: 20px; 
+    box-shadow: 0 5px 15px rgba(217, 119, 6, 0.4); 
+    transition: 0.4s;
+}
+.card-arrow i { display: block; line-height: 0; }
+.card:hover .card-arrow { background: var(--primary); transform: rotate(-45deg); }
+
+/* --- 8. IMAGE FIXES --- */
+.limit-img {
+    width: 100%;
+    max-width: 550px;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px -10px rgba(0,0,0,0.3);
+    display: block; margin: 0 auto;
+}
+
+/* --- 9. STATS & FOOTER --- */
+.stats-bar { 
+    background: linear-gradient(135deg, var(--primary), #064e3b); 
+    color: white; padding: 80px 0; text-align: center; 
+    margin-top: -50px; position: relative; z-index: 10;
+    border-radius: 0 0 50px 50px;
+}
+.stat-item h2 { font-size: 3.5rem; font-weight: 800; color: #f59e0b; margin: 0; line-height: 1; }
+footer { background: #0f172a; color: #94a3b8; padding: 60px 0 30px; }
+
+/* --- 10. ANIMATIONS --- */
+@keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+@keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(0.95); opacity: 0.7; } }
+.hidden { opacity: 0; transform: translateY(40px); transition: 0.8s ease; }
+.show { opacity: 1; transform: translateY(0); }
+
+/* --- 11. MOBILE RESPONSIVENESS --- */
+@media (max-width: 968px) {
+    .hamburger { display: block; }
+    
+    .nav-links { 
+        position: fixed;
+        top: 0; right: -100%;
+        width: 70%; height: 100vh;
+        background: #0f172a;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: 0.4s ease;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+    }
+    .nav-links.active { right: 0; }
+    
+    .hero h1 { font-size: 2.8rem; }
+    .grid-2 { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+    .grid-2 div:first-child { order: 1; }
+    .grid-2 div:last-child { order: 2; }
+}
